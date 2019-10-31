@@ -8,29 +8,30 @@
 
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/cdusername"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="156dp"
+        android:layout_marginTop="228dp"
         android:layout_marginEnd="24dp"
 
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="386dp"
         android:hint="@string/prompt_usuario"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
-        app:layout_constraintBottom_toTopOf="@+id/password"
+        app:layout_constraintBottom_toTopOf="@+id/btncadastrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.153" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/cdpassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="11dp"
 
         android:layout_marginEnd="24dp"
         android:hint="@string/prompt_senha"
@@ -41,15 +42,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/cdusername" />
 
     <EditText
-        android:id="@+id/confpassword"
+        android:id="@+id/cdconfpassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="72dp"
 
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="24dp"
         android:hint="@string/confsenha"
         android:imeActionLabel="@string/confsenha"
@@ -57,26 +58,25 @@
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/cdpassword" />
 
     <Button
-        android:id="@+id/telacadastrar"
+        android:id="@+id/btncadastrar"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginTop="66dp"
+        android:layout_marginBottom="268dp"
         android:background="#689F38"
         android:text="@string/telacadastro"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintTop_toBottomOf="@+id/cdconfpassword" />
 
     <TextView
         android:id="@+id/tcadastro"
@@ -84,7 +84,7 @@
         android:layout_height="42dp"
         android:layout_marginStart="128dp"
         android:layout_marginLeft="128dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="128dp"
         android:layout_marginRight="128dp"
         android:layout_marginBottom="56dp"
@@ -93,7 +93,7 @@
         android:textSize="28sp"
         app:layout_constraintBottom_toTopOf="@+id/username"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.833" />
