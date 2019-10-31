@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="br.com.meencontreaqui.prj_meencontreaqui.ui.inicio.InicioFragment"
+        android:label="@string/menu_inicio"
+        tools:layout="@layout/fragment_inicio" />
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="br.com.meencontreaqui.prj_meencontreaqui.ui.minhaconta.MinhaContaFragment"
+        android:label="@string/menu_minhaconta"
+        tools:layout="@layout/fragment_minhaconta" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="br.com.meencontreaqui.prj_meencontreaqui.ui.novoamigo.NovoAmigoFragment"
+        android:label="@string/menu_novoamigo"
+        tools:layout="@layout/fragment_novoamigo" />
+
+    <fragment
+        android:id="@+id/nav_tools"
+        android:name="br.com.meencontreaqui.prj_meencontreaqui.ui.novogrupo.NovoGrupoFragment"
+        android:label="@string/menu_novogrupo"
+        tools:layout="@layout/fragment_novogrupo" />
+
+    <fragment
+        android:id="@+id/nav_share"
+        android:name="br.com.meencontreaqui.prj_meencontreaqui.ui.configuracoes.ConfiguracoesFragment"
+        android:label="@string/menu_configuracoes"
+        tools:layout="@layout/fragment_configuracoes" />
+
+    <fragment
+        android:id="@+id/nav_send"
+        android:name="br.com.meencontreaqui.prj_meencontreaqui.ui.sair.SairFragment"
+        android:label="@string/menu_sair"
+        tools:layout="@layout/fragment_sair" />
+</navigation>
