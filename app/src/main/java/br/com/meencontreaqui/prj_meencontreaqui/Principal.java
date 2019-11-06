@@ -20,10 +20,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.TextView;
 
 public class Principal extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+    private String nomeusuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +46,15 @@ public class Principal extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_send)
+                R.id.nav_inicio, R.id.nav_minhaconta, R.id.nav_novoamigo,
+                R.id.nav_novogrupo, R.id.nav_configuracoes, R.id.nav_sair)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        TextView nomeusuario = (TextView) findViewById(R.id.txtusuario);
     }
 
     @Override

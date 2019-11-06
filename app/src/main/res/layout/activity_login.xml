@@ -27,7 +27,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.218"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+
+
+        />
 
     <EditText
         android:id="@+id/password"
@@ -55,10 +58,10 @@
         android:layout_marginStart="48dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="48dp"
-        android:background="#689F38"
+        android:background="@color/greenPadrao"
         android:text="@string/entrar"
+        android:textColor="@color/white"
         android:textSize="18sp"
-        android:onClick="proximaTelaPrincipal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,16 +77,16 @@
         android:layout_marginTop="38dp"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="212dp"
-        android:background="#689F38"
-        android:onClick="proximaTela"
+        android:background="@color/greenPadrao"
         android:text="@string/cadastrar"
         android:textSize="16sp"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/entrar"
-        app:layout_constraintVertical_bias="0.238" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/bemvindo"

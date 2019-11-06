@@ -15,7 +15,7 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Cadastro"
-            android:label=""
+            android:label="Cadastro"
             android:parentActivityName=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />

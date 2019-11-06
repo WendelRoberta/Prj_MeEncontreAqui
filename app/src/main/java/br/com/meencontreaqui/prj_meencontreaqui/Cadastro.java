@@ -9,10 +9,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.UUID;
 
 import br.com.meencontreaqui.prj_meencontreaqui.R;
-import br.com.meencontreaqui.prj_meencontreaqui.database.DbAdapter;
-import br.com.meencontreaqui.prj_meencontreaqui.entidades.Usuarios;
 
 
 public class Cadastro extends AppCompatActivity {
@@ -34,37 +40,37 @@ public class Cadastro extends AppCompatActivity {
         cdpassword = findViewById(R.id.cdpassword);
         cdconfpassword = findViewById(R.id.cdconfpassword);
         btncadastrar = findViewById(R.id.btncadastrar);
-        
+
 
         //ação a ser executada quando clicar o botão cadastrar
         btncadastrar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //validação dos campos de senha e confirmação de senha
-                if (cdpassword.getText().toString().equals(cdconfpassword.getText().toString())){
-                    //adicionar usuário ao banco de dados
-                    DbAdapter adapter = new DbAdapter(Cadastro.this);
-                    Usuarios usuarios = adapter.createUsuarios(cdusername.getText().toString(),
-                            cdpassword.getText().toString());
-                    //mensagem de usuário cadastrado
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Cadastro.this);
-                    builder.setTitle("Usuário cadastrado");
-                    builder.setMessage("Usuário " + usuarios.getUsername() + " adicionado com sucesso!");
-                    AlertDialog alerta = builder.create();
-                    alerta.show();
-                }else{
-                    //mensagem caso as senhas sejam diferentes
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Cadastro.this);
-                    builder.setTitle("Senhas diferentes");
-                    builder.setMessage("Confirme se as senhas inseridas são iguais!");
-                    AlertDialog alerta = builder.create();
-                    alerta.show();
+                if (cdusername.getText().toString().equals("") ||
+                        cdpassword.getText().toString().equals("") ||
+                        cdconfpassword.getText().toString().equals("")) {
+                    //mensagem de espaço de senha vazio
+                    Toast.makeText(getApplicationContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                }else if (!cdpassword.getText().toString().equals(cdconfpassword.getText().toString())) {
+                        //mensagem caso as senhas sejam diferentes
+                        Toast.makeText(getApplicationContext(), "Senhas diferentes", Toast.LENGTH_SHORT).show();
+                    }
+                 else {
+                    Toast.makeText(getApplicationContext(), "Usuário adicionado!", Toast.LENGTH_SHORT).show();
                 }
 
             }
 
-            });
+        });
     }
 
-
 }
+
+
+//a caixa de alerta para se precisarmos:
+//AlertDialog.Builder builder = new AlertDialog.Builder(Cadastro.this);
+// builder.setTitle("Senhas diferentes");
+//builder.setMessage("Confirme se as senhas inseridas são iguais!");
+// AlertDialog alerta = builder.create();
+// alerta.show();
 

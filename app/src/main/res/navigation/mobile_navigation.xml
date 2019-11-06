@@ -6,37 +6,37 @@
     app:startDestination="@+id/nav_home">
 
     <fragment
-        android:id="@+id/nav_home"
+        android:id="@+id/nav_inicio"
         android:name="br.com.meencontreaqui.prj_meencontreaqui.ui.inicio.InicioFragment"
         android:label="@string/menu_inicio"
         tools:layout="@layout/fragment_inicio" />
 
     <fragment
-        android:id="@+id/nav_gallery"
+        android:id="@+id/nav_minhaconta"
         android:name="br.com.meencontreaqui.prj_meencontreaqui.ui.minhaconta.MinhaContaFragment"
         android:label="@string/menu_minhaconta"
         tools:layout="@layout/fragment_minhaconta" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
+        android:id="@+id/nav_novoamigo"
         android:name="br.com.meencontreaqui.prj_meencontreaqui.ui.novoamigo.NovoAmigoFragment"
         android:label="@string/menu_novoamigo"
         tools:layout="@layout/fragment_novoamigo" />
 
     <fragment
-        android:id="@+id/nav_tools"
+        android:id="@+id/nav_novogrupo"
         android:name="br.com.meencontreaqui.prj_meencontreaqui.ui.novogrupo.NovoGrupoFragment"
         android:label="@string/menu_novogrupo"
         tools:layout="@layout/fragment_novogrupo" />
 
     <fragment
-        android:id="@+id/nav_share"
+        android:id="@+id/nav_configuracoes"
         android:name="br.com.meencontreaqui.prj_meencontreaqui.ui.configuracoes.ConfiguracoesFragment"
         android:label="@string/menu_configuracoes"
         tools:layout="@layout/fragment_configuracoes" />
 
     <fragment
-        android:id="@+id/nav_send"
+        android:id="@+id/nav_sair"
         android:name="br.com.meencontreaqui.prj_meencontreaqui.ui.sair.SairFragment"
         android:label="@string/menu_sair"
         tools:layout="@layout/fragment_sair" />

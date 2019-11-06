@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "666421446587",
+    "firebase_url": "https://prjmeencontreaqui.firebaseio.com",
+    "project_id": "prjmeencontreaqui",
+    "storage_bucket": "prjmeencontreaqui.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666421446587:android:9469e09d0737e3f419e69e",
+        "android_client_info": {
+          "package_name": "br.com.meencontreaqui.prj_meencontreaqui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666421446587-aek8je0vgda66vsn4tl7617cj4iit7sg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.meencontreaqui.prj_meencontreaqui",
+            "certificate_hash": "a714fd4b03bb1e21c7f65d85f80724dc2eab8359"
+          }
+        },
+        {
+          "client_id": "666421446587-f2j4bt8f26aq9b3klal6dpr5scu3hok3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDtdRFHf-X1qsSp8yqaw8Mnx5dbcmO0M0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "666421446587-f2j4bt8f26aq9b3klal6dpr5scu3hok3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

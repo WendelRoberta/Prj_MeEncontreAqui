@@ -18,6 +18,8 @@
     <string name="menu_novogrupo">Novo Grupo</string>
     <string name="menu_sair">Sair</string>
 
+    <string name="saudacao">Olá, </string>
+
     <string name="title_activity_principal">Principal</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
