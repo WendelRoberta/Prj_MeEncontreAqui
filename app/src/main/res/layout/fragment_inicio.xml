@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
+   <ScrollView
+        android:id="@+id/idscrollview"
         android:layout_width="414dp"
         android:layout_height="341dp"
         android:layout_marginTop="390dp"
@@ -19,19 +20,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/txtsaudacao"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="@string/saudacao"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:textSize="25dp" />
+    <TextView
+        android:id="@+id/txtsaudacao"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:text="@string/saudacao"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.gms.maps.MapView
-                android:id="@+id/mapView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
