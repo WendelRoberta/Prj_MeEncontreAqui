@@ -7,6 +7,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import android.view.View;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -22,13 +24,18 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.widget.TextView;
 
+import br.com.meencontreaqui.prj_meencontreaqui.ui.inicio.MapsFragment;
+
+
+
 public class Principal extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private String nomeusuario;
+    private FragmentManager fragmentManager;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -55,12 +62,20 @@ public class Principal extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         TextView nomeusuario = (TextView) findViewById(R.id.txtusuario);
+
+        fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(R.id.framemapa, new MapsFragment(), "MapsFragment");
+        transaction.commitAllowingStateLoss();
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.principal, menu);
+
+
         return true;
     }
 

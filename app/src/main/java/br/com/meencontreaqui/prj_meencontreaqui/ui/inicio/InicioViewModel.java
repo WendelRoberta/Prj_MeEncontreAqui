@@ -14,8 +14,6 @@ public class InicioViewModel extends ViewModel {
     private ScrollView scrollView;
 
     public InicioViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("");
     }
 
     public LiveData<String> getText() {
