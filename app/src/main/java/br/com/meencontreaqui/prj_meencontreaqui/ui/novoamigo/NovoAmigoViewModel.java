@@ -13,8 +13,6 @@ public class NovoAmigoViewModel extends ViewModel {
     private MutableLiveData<String> mText;
 
     public NovoAmigoViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("");
     }
 
     public LiveData<String> getText() {

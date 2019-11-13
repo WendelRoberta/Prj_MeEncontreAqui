@@ -11,7 +11,6 @@ import br.com.meencontreaqui.prj_meencontreaqui.R;
 public class InicioViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
-    private ScrollView scrollView;
 
     public InicioViewModel() {
     }

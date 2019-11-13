@@ -3,12 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <FrameLayout
         android:id="@+id/framemapa"
         android:layout_width="match_parent"
-        android:layout_height="451dp">
+        android:layout_height="404dp">
 
     </FrameLayout>
+
+    <Switch
+        android:id="@+id/switchlocalizacao"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:textSize="17sp"
+        android:gravity="center_vertical"
+        android:background="@color/grey"
+        android:text="@string/minhalocalizacao"
+ />
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>

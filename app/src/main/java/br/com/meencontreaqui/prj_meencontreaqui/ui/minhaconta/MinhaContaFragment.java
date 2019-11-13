@@ -23,13 +23,6 @@ public class MinhaContaFragment extends Fragment {
         minhaContaViewModel =
                 ViewModelProviders.of(this).get(MinhaContaViewModel.class);
         View root = inflater.inflate(R.layout.fragment_minhaconta, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
-        minhaContaViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         return root;
     }
 }

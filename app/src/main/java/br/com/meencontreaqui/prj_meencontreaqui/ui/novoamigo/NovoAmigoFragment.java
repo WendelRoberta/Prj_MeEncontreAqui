@@ -23,13 +23,6 @@ public class NovoAmigoFragment extends Fragment {
         novoAmigoViewModel =
                 ViewModelProviders.of(this).get(NovoAmigoViewModel.class);
         View root = inflater.inflate(R.layout.fragment_novoamigo, container, false);
-        final TextView textView = root.findViewById(R.id.text_slideshow);
-        novoAmigoViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         return root;
     }
 }

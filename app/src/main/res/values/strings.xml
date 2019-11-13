@@ -10,6 +10,14 @@
     <string name="tcadastro">Cadastro</string>
     <string name="confsenha">Confirme a senha</string>
     <string name="telacadastro">Cadastrar</string>
+    <string name="btnaddamigo">Adicionar amigo</string>
+    <string name="btncriargrupo">Criar grupo</string>
+    <string name="hintusername">Username</string>
+    <string name="hintnomegrupo">Nome do grupo</string>
+    <string name="meusamigos">Meus amigos</string>
+    <string name="selecamigos">Selecione os amigos</string>
+    <string name="minhalocalizacao">Minha localização</string>
+
 
     <string name="menu_inicio">Início</string>
     <string name="menu_configuracoes">Configurações</string>

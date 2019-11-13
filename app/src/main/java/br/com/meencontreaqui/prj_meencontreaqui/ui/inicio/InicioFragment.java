@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toolbar;
@@ -16,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.ListFragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -33,33 +35,11 @@ public class InicioFragment extends Fragment  {
     private InicioViewModel inicioViewModel;
     private FragmentManager fragmentManager;
 
-    Principal scrollView;
-    TextView saudacao;
-
-    Principal mapView;
-    GoogleMap map;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         inicioViewModel =
                 ViewModelProviders.of(this).get(InicioViewModel.class);
         View root = inflater.inflate(fragment_inicio, container, false);
-
-        /*final ScrollView sv = (ScrollView) inflater.inflate(R.layout.fragment_inicio, container, false);
-        scrollView = Principal.class.cast(sv.findViewById(R.id.idscrollview));
-        return sv;
-
-        final View mv = (View) inflater.inflate(R.layout.fragment_inicio, container, false);
-        mapView = Principal.class.cast(mv.findViewById(R.id.idmapView));
-        mapView.onCreate(savedInstanceState);
-
-        if (mapView != null) {
-            map = mapView.getMap();
-            map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-            map.getUiSettings().setAllGesturesEnabled(true);
-            map.getUiSettings().setCompassEnabled(true);
-            map.getUiSettings().setMyLocationButtonEnabled(true);
-        }*/
 
         fragmentManager = getChildFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();

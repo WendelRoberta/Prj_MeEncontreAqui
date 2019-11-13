@@ -9,8 +9,6 @@ public class NovoGrupoViewModel extends ViewModel {
     private MutableLiveData<String> mText;
 
     public NovoGrupoViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is tools fragment");
     }
 
     public LiveData<String> getText() {

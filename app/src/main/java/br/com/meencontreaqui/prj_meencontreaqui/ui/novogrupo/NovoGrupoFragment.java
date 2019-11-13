@@ -23,13 +23,6 @@ public class NovoGrupoFragment extends Fragment {
         novoGrupoViewModel =
                 ViewModelProviders.of(this).get(NovoGrupoViewModel.class);
         View root = inflater.inflate(R.layout.fragment_novogrupo, container, false);
-        final TextView textView = root.findViewById(R.id.text_tools);
-        novoGrupoViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         return root;
     }
 }
