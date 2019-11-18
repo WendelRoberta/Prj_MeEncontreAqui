@@ -15,6 +15,14 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.Task;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.util.UUID;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,10 +56,30 @@ public class Cadastro extends AppCompatActivity {
         cdconfpassword = findViewById(R.id.cdconfpassword);
         btncadastrar = findViewById(R.id.btncadastrar);
 
-
-        final TextView resposta = findViewById(R.id.tcadastro);
-
-
+        URL url = new URL("http://pokeapi.co/api/v2/pokemon/1/");
+        HttpURLConnection urlConnection = null;
+        try {
+            urlConnection = (HttpURLConnection) url.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            urlConnection.setRequestMethod("GET");
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        }
+        try {
+            urlConnection.connect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        InputStream inputStream = null;
+        try {
+            inputStream = urlConnection.getInputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (inputStream == null) {
 
         //ação a ser executada quando clicar o botão cadastrar
         btncadastrar.setOnClickListener(new View.OnClickListener() {
