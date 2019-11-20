@@ -1,35 +1,22 @@
 package br.com.meencontreaqui.prj_meencontreaqui;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.os.StrictMode;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.Task;
+import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.util.UUID;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.concurrent.ExecutionException;
-
-import br.com.meencontreaqui.prj_meencontreaqui.R;
 
 
 public class Cadastro extends AppCompatActivity {
@@ -39,6 +26,7 @@ public class Cadastro extends AppCompatActivity {
     private EditText cdpassword;
     private EditText cdconfpassword;
     private Button btncadastrar;
+    private UserResources userResources;
 
 
 
@@ -51,12 +39,21 @@ public class Cadastro extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        StrictMode.ThreadPolicy policy = new StrictMode.
+                ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         cdusername = findViewById(R.id.cdusername);
         cdpassword = findViewById(R.id.cdpassword);
         cdconfpassword = findViewById(R.id.cdconfpassword);
         btncadastrar = findViewById(R.id.btncadastrar);
 
-        URL url = new URL("http://pokeapi.co/api/v2/pokemon/1/");
+        URL url = null;
+        try {
+            url = new URL("https://projetomobile.herokuapp.com/api/users/create");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         HttpURLConnection urlConnection = null;
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
@@ -81,79 +78,47 @@ public class Cadastro extends AppCompatActivity {
         }
         if (inputStream == null) {
 
-        //ação a ser executada quando clicar o botão cadastrar
-        btncadastrar.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //validação dos campos de senha e confirmação de senha
-                if (cdusername.getText().toString().equals("") ||
-                        cdpassword.getText().toString().equals("") ||
-                        cdconfpassword.getText().toString().equals("")) {
-                    //mensagem de espaço de senha vazio
-                    Toast.makeText(getApplicationContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
-                }else if (!cdpassword.getText().toString().equals(cdconfpassword.getText().toString())) {
+            //ação a ser executada quando clicar o botão cadastrar
+            btncadastrar.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    //validação dos campos de senha e confirmação de senha
+                    if (cdusername.getText().toString().equals("") ||
+                            cdpassword.getText().toString().equals("") ||
+                            cdconfpassword.getText().toString().equals("")) {
+                        //mensagem de espaço de senha vazio
+                        Toast.makeText(getApplicationContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                    } else if (!cdpassword.getText().toString().equals(cdconfpassword.getText().toString())) {
                         //mensagem caso as senhas sejam diferentes
                         Toast.makeText(getApplicationContext(), "Senhas diferentes", Toast.LENGTH_SHORT).show();
+                    } else {
+                        String nome = cdusername.getText().toString();
+                        String senha = cdconfpassword.getText().toString();
+                        User user = new User(nome, senha);
+                            this.inserirContato(user);
+                           // User retorno = new HttpService(cdusername.getText().toString(), cdpassword.getText().toString()).execute().get();
+                            Toast.makeText(getApplicationContext(), "Usuário adicionado!", Toast.LENGTH_SHORT).show();
+
+
+
                     }
-                 else {
-                    try {
-                        User retorno = new HttpService(cdusername.getText().toString(), cdpassword.getText().toString()).execute().get();
-                        Toast.makeText(getApplicationContext(), "Usuário adicionado!", Toast.LENGTH_SHORT).show();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    }
+                }public void inserirContato(User user) {
 
 
-        /*String URL = "http://localhost:8080/api/user/create";
-        //("name": cdusername.getText().toString(), "password": cdpassword.getText().toString());
-        try {
-            JSONObject jsonuser = new JSONObject();
-            jsonuser.put("name", cdusername.getText());
-            jsonuser.put("password", cdpassword.getText());
-        JsonObjectRequest objectRequest = new JsonObjectRequest(
-                Request.Method.PUT,
-                URL,
-                jsonuser,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Toast.makeText(getApplicationContext(), "Sucesso!", Toast.LENGTH_SHORT).show();
+                                                    try {
+                                                        Log.i("============USUARIO :", user.toString());
+                                                        userResources.insertUser(user);
 
-                            JSONArray jsonImages = null;
-                            try {
-                                jsonImages = response.getJSONArray("images");
+                                                    } catch (IOException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
 
-                                for(int i =0; i < jsonImages.length(); i++) {
-                                    JSONObject jsonImage = jsonImages.getJSONObject(i);
-                                    String name = jsonImage.getString("name");
-                                    String password = jsonImage.getString("password");
-
-                                    User user = new User(name, password);
-                                    Log.e("user", user.toString());
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), "Tente novamente", Toast.LENGTH_SHORT).show();
-                    }
-                }
-        );
-        requestQueue.add(objectRequest);
-        }catch (Exception i){
-            i.printStackTrace();
-        }
-                */}
             }
 
-        });
-    }
+            );
 
+        }
+}
 }
 
 
