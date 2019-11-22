@@ -58,6 +58,44 @@ public class UserResources {
         return users;
     }
 
+    //Rota de login
+    public List<User> login(User user) throws IOException {
+        URL url = new URL("https://projetomobile.herokuapp.com/api/user/"+user.getName());
+        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Content-Type", "application/json");
+
+
+        Log.i("zzz", "Response Code: " + conn.getResponseCode());
+
+        BufferedInputStream in = new BufferedInputStream(conn.getInputStream());
+        BufferedReader br = new BufferedReader(new InputStreamReader(in));
+        String corpo = "";
+        String linha = br.readLine();
+        while (linha != null) {
+            corpo += linha + "\n";
+            linha = br.readLine();
+        }
+
+        ArrayList<User> users = new ArrayList<>();
+        try {
+            JSONArray jsonArray = new JSONArray(corpo);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                User userslist = jsonObjectToContato(jsonObject);
+                users.add(0, userslist);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.i("zzz", "Corpo: " + corpo);
+
+        return users;
+    }
+
     private JSONObject toJSON(User user)
     throws JSONException {
         JSONObject obj = new JSONObject();
@@ -73,20 +111,20 @@ public class UserResources {
 
         return new User(name,password);
     }
-
-    public String insertUser(User teste) throws IOException, JSONException {
+    //metodo que faz um http request com post na rota de criação de usuario
+    public boolean insertUser(User user) throws IOException, JSONException {
+        boolean success = false;
         URL url = new URL("https://projetomobile.herokuapp.com/api/users/create");
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-Type", "application/json");
 
-        User user = new User("bbb", "ccc");
+      //  User user = new User("bbb", "ccc");
 
        // OutputStream os = conn.getOutputStream();
       //  PrintStream ps = new PrintStream(os);
 
         JSONObject jsonObject = new JSONObject();
-        Log.i("========criar o json","erro linha 78");
         try {
             jsonObject.put("name", user.getName());
             jsonObject.put("password", user.getPassword());
@@ -105,16 +143,15 @@ public class UserResources {
 
         String jsonDeResposta = new Scanner(conn.getInputStream()).next();
 
-      //  Log.i("========criar o json","erro linha 85");
-
         Log.i("zzz", "JSON enviado: " + jsonObject.toString());
-     //   ps.print(jsonObject.toString());
-
         Log.i("zzz", "Response Code: " + conn.getResponseCode());
+        if (conn.getResponseCode()==200){
+            success = true;
+        }
 
 
 
-        return "name";
+        return success;
     }
 }
 
