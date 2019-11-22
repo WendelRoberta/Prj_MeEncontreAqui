@@ -4,8 +4,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.google.gson.JsonIOException;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,12 +12,12 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class UserResources {
         private static final String URL =
@@ -80,11 +78,12 @@ public class UserResources {
         URL url = new URL("https://projetomobile.herokuapp.com/api/users/create");
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/json");
 
         User user = new User("bbb", "ccc");
 
-        OutputStream os = conn.getOutputStream();
-        PrintStream ps = new PrintStream(os);
+       // OutputStream os = conn.getOutputStream();
+      //  PrintStream ps = new PrintStream(os);
 
         JSONObject jsonObject = new JSONObject();
         Log.i("========criar o json","erro linha 78");
@@ -95,33 +94,27 @@ public class UserResources {
             e.printStackTrace();
             System.out.println("Erro em inserir!");
         }
-        Log.i("========criar o json","erro linha 85");
+
+        conn.setDoOutput(true); //fala que voce vai enviar algo
+
+
+        PrintStream printStream = new PrintStream(conn.getOutputStream());
+        printStream.println(jsonObject); //seta o que voce vai enviar
+
+        conn.connect(); //envia para o servidor
+
+        String jsonDeResposta = new Scanner(conn.getInputStream()).next();
+
+      //  Log.i("========criar o json","erro linha 85");
 
         Log.i("zzz", "JSON enviado: " + jsonObject.toString());
-        ps.print(jsonObject.toString());
+     //   ps.print(jsonObject.toString());
 
         Log.i("zzz", "Response Code: " + conn.getResponseCode());
 
-        BufferedInputStream in = new BufferedInputStream(conn.getInputStream());
-        BufferedReader br = new BufferedReader(new InputStreamReader(in));
-        String corpo = "";
-        String linha = br.readLine();
-        while (linha != null) {
-            corpo += linha + "\n";
-            linha = br.readLine();
-        }
-
-        String name = "";
-        try {
-            JSONObject objName = new JSONObject(corpo);
-             name = objName.getString("name");
-        } catch (JSONException e) {
-            e.printStackTrace();
-            System.out.println("Erro em inserir!");
-        }
 
 
-        return name;
+        return "name";
     }
 }
 
