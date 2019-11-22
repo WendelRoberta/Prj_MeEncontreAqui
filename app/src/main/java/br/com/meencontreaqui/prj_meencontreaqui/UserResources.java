@@ -4,6 +4,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.JsonIOException;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -58,6 +60,14 @@ public class UserResources {
         return users;
     }
 
+    private JSONObject toJSON(User user)
+    throws JSONException {
+        JSONObject obj = new JSONObject();
+        obj.put("name", user.getName());
+        obj.put("password", user.getPassword());
+        return obj;
+    }
+
     @NonNull
     private User jsonObjectToContato(JSONObject jsonObject) throws JSONException {
         String name = jsonObject.getString("name");
@@ -66,10 +76,12 @@ public class UserResources {
         return new User(name,password);
     }
 
-    public String insertUser(User user) throws IOException {
+    public String insertUser(User teste) throws IOException, JSONException {
         URL url = new URL("https://projetomobile.herokuapp.com/api/users/create");
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setRequestMethod("POST");
+
+        User user = new User("bbb", "ccc");
 
         OutputStream os = conn.getOutputStream();
         PrintStream ps = new PrintStream(os);
@@ -81,6 +93,7 @@ public class UserResources {
             jsonObject.put("password", user.getPassword());
         } catch (JSONException e) {
             e.printStackTrace();
+            System.out.println("Erro em inserir!");
         }
         Log.i("========criar o json","erro linha 85");
 
@@ -104,6 +117,7 @@ public class UserResources {
              name = objName.getString("name");
         } catch (JSONException e) {
             e.printStackTrace();
+            System.out.println("Erro em inserir!");
         }
 
 

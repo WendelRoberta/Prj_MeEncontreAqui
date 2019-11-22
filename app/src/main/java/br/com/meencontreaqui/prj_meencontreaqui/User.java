@@ -16,9 +16,6 @@ class User {
             super();
             this.name = name;
             this.password = password;
-            this.longitude = 0;
-            this.latitude = 0;
-            this.active = 0;
         }
 
         @Override
