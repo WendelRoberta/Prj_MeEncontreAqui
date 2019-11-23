@@ -82,6 +82,8 @@ public class LoginActivity extends AppCompatActivity {
                     if(response.getName().equalsIgnoreCase(user.getName()) && response.getPassword().equalsIgnoreCase(user.getPassword())){
                         Toast.makeText(getApplicationContext(), "Usuário criado com sucesso", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(getApplicationContext(), Principal.class);
+                        i.putExtra("UserName",response.getName());
+                        i.putExtra("Password",response.getPassword());
                         startActivity(i);
 
                     }

@@ -38,7 +38,6 @@ public class UserResources {
             corpo += linha + "\n";
             linha = br.readLine();
         }
-
         ArrayList<User> users = new ArrayList<>();
         try {
             JSONArray jsonArray = new JSONArray(corpo);
@@ -60,13 +59,16 @@ public class UserResources {
 
     //Rota de login
     public User login(User user) throws IOException {
+        //URL com a rota pronta para fazer login
         URL url = new URL("https://projetomobile.herokuapp.com/api/user/name/"+user.getName());
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setRequestMethod("GET");
 
+        //Feedback do httprequest com codigo e menssagem caso tenha
         Log.i("zzz", "Response Code: " + conn.getResponseCode());
         Log.i("zzz", "Response Message: " + conn.getResponseMessage());
 
+        //Isso transforma a resposta em uma string
         BufferedInputStream in = new BufferedInputStream(conn.getInputStream());
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
         String corpo = "";
@@ -77,6 +79,8 @@ public class UserResources {
         }
 
         User users = new User();
+
+        //esse bloco tenta transformar a resposta em string em um objeto do tipo Pessoa
         try {
                 JSONObject obj = new JSONObject(corpo);
                 users= jsonObjectToUser(obj);
@@ -110,14 +114,11 @@ public class UserResources {
         URL url = new URL("https://projetomobile.herokuapp.com/api/users/create");
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setRequestMethod("POST");
+        //essa linha garante que o formato enviado vai ser application/json
         conn.setRequestProperty("Content-Type", "application/json");
 
-      //  User user = new User("bbb", "ccc");
-
-       // OutputStream os = conn.getOutputStream();
-      //  PrintStream ps = new PrintStream(os);
-
         JSONObject jsonObject = new JSONObject();
+        //esse bloco tenta criar um json object com os parametros passados para criação
         try {
             jsonObject.put("name", user.getName());
             jsonObject.put("password", user.getPassword());
@@ -138,6 +139,7 @@ public class UserResources {
 
         Log.i("zzz", "JSON enviado: " + jsonObject.toString());
         Log.i("zzz", "Response Code: " + conn.getResponseCode());
+
         if (conn.getResponseCode()==200){
             success = true;
         }
