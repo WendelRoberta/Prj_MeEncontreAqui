@@ -46,7 +46,7 @@ public class UserResources {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                User user = jsonObjectToContato(jsonObject);
+                User user = jsonObjectToUser(jsonObject);
                 users.add(0, user);
             }
         } catch (JSONException e) {
@@ -59,14 +59,13 @@ public class UserResources {
     }
 
     //Rota de login
-    public List<User> login(User user) throws IOException {
-        URL url = new URL("https://projetomobile.herokuapp.com/api/user/"+user.getName());
+    public User login(User user) throws IOException {
+        URL url = new URL("https://projetomobile.herokuapp.com/api/user/name/"+user.getName());
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setRequestMethod("GET");
-        conn.setRequestProperty("Content-Type", "application/json");
-
 
         Log.i("zzz", "Response Code: " + conn.getResponseCode());
+        Log.i("zzz", "Response Message: " + conn.getResponseMessage());
 
         BufferedInputStream in = new BufferedInputStream(conn.getInputStream());
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -77,21 +76,15 @@ public class UserResources {
             linha = br.readLine();
         }
 
-        ArrayList<User> users = new ArrayList<>();
+        User users = new User();
         try {
-            JSONArray jsonArray = new JSONArray(corpo);
+                JSONObject obj = new JSONObject(corpo);
+                users= jsonObjectToUser(obj);
+                Log.d("Objeto Json", obj.toString());
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                User userslist = jsonObjectToContato(jsonObject);
-                users.add(0, userslist);
-            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        Log.i("zzz", "Corpo: " + corpo);
 
         return users;
     }
@@ -105,7 +98,7 @@ public class UserResources {
     }
 
     @NonNull
-    private User jsonObjectToContato(JSONObject jsonObject) throws JSONException {
+    private User jsonObjectToUser(JSONObject jsonObject) throws JSONException {
         String name = jsonObject.getString("name");
         String password = jsonObject.getString("password");
 
