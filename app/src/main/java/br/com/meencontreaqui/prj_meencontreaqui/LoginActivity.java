@@ -1,10 +1,8 @@
 package br.com.meencontreaqui.prj_meencontreaqui;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +10,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.List;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -23,6 +25,10 @@ public class LoginActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StrictMode.ThreadPolicy policy = new StrictMode.
+                ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         setContentView(R.layout.activity_login);
         Button entrar = (Button) findViewById(R.id.entrar);
         Button cadastrar = (Button) findViewById(R.id.cadastrar);
@@ -36,7 +42,6 @@ public class LoginActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
 
-
         cadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,7 +50,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,11 +57,36 @@ public class LoginActivity extends AppCompatActivity {
                         password.getText().toString().equals("")) {
                     //mensagem de espaço de senha vazio
                     Toast.makeText(getApplicationContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
-                } else if (username.getText().toString().equals("root") && password.getText().toString().equals("123")) {
-                    Intent i = new Intent(getApplicationContext(), Principal.class);
-                    startActivity(i);
+                } else{
+                    String nome = username.getText().toString();
+                    String senha = password.getText().toString();
+                    User user = new User(nome, senha);
+                    this.login(user);
+
                 }
-            } 
+            }
+            public void login(User user) {
+                try {
+                    UserResources userResources = new UserResources();
+                    User response = null;
+
+                    List<User> lista = userResources.getUsers();
+
+                    response = userResources.login(user);
+                    if(response.getName().equalsIgnoreCase(user.getName()) && response.getPassword().equalsIgnoreCase(user.getPassword())){
+                        Toast.makeText(getApplicationContext(), "Login efetuado", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(getApplicationContext(), Principal.class);
+                        i.putExtra("UserName",response.getName());
+                        i.putExtra("Password",response.getPassword());
+                        i.putExtra("lista",(Serializable) lista);
+                        startActivity(i);
+
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("Erro em fazer login!");
+                }
+            }
         });
         }
 }

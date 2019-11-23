@@ -1,6 +1,8 @@
 package br.com.meencontreaqui.prj_meencontreaqui;
 
-class User {
+import java.io.Serializable;
+
+class User implements Serializable {
         private long id;
         private String name;
         private String password;
@@ -21,7 +23,15 @@ class User {
             this.active = 0;
         }
 
-        @Override
+    public User(String name, String password, Long longitude, Long latitude, int active) {
+        this.name = name;
+        this.password = password;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.active = active;
+    }
+
+    @Override
         public int hashCode() {
             final int prime = 31;
             int result = 1;

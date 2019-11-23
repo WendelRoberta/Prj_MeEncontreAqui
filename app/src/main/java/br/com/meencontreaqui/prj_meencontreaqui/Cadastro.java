@@ -1,27 +1,18 @@
 package br.com.meencontreaqui.prj_meencontreaqui;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.Task;
+import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.util.concurrent.ExecutionException;
-
-import br.com.meencontreaqui.prj_meencontreaqui.R;
+import java.io.IOException;
 
 
 public class Cadastro extends AppCompatActivity {
@@ -67,60 +58,43 @@ public class Cadastro extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Senhas diferentes", Toast.LENGTH_SHORT).show();
                     }
                  else {
-                    try {
-                        User retorno = new HttpService(cdusername.getText().toString(), cdpassword.getText().toString()).execute().get();
-                        Toast.makeText(getApplicationContext(), "Usuário adicionado!", Toast.LENGTH_SHORT).show();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    }
+                    String nome = cdusername.getText().toString();
+                    String senha = cdconfpassword.getText().toString();
+                    User user = new User(nome, senha);
+                    this.inserirContato(user);
 
 
-        /*String URL = "http://localhost:8080/api/user/create";
-        //("name": cdusername.getText().toString(), "password": cdpassword.getText().toString());
-        try {
-            JSONObject jsonuser = new JSONObject();
-            jsonuser.put("name", cdusername.getText());
-            jsonuser.put("password", cdpassword.getText());
-        JsonObjectRequest objectRequest = new JsonObjectRequest(
-                Request.Method.PUT,
-                URL,
-                jsonuser,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Toast.makeText(getApplicationContext(), "Sucesso!", Toast.LENGTH_SHORT).show();
-
-                            JSONArray jsonImages = null;
-                            try {
-                                jsonImages = response.getJSONArray("images");
-
-                                for(int i =0; i < jsonImages.length(); i++) {
-                                    JSONObject jsonImage = jsonImages.getJSONObject(i);
-                                    String name = jsonImage.getString("name");
-                                    String password = jsonImage.getString("password");
-
-                                    User user = new User(name, password);
-                                    Log.e("user", user.toString());
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), "Tente novamente", Toast.LENGTH_SHORT).show();
-                    }
                 }
-        );
-        requestQueue.add(objectRequest);
-        }catch (Exception i){
-            i.printStackTrace();
-        }
-                */}
+            }
+            public void inserirContato(User user) {
+
+                UserResources userResources = new UserResources();
+                boolean success = false;
+
+                try {
+                    success = userResources.insertUser(user);
+                    if(success){
+                        Toast.makeText(getApplicationContext(), "Usuário criado com sucesso", Toast.LENGTH_SHORT).show();
+                        cdusername.setText("");
+                        cdpassword.setText("");
+                        cdconfpassword.setText("");
+
+
+                    }
+
+                    //  userResources.insertUser(new User("bbb", "ccc"));
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("Erro em inserir!");
+
+                    //JOGA O ERRO NO USUARIO E SENHA  PRECISA SER REFEITO
+                    cdusername.setText("ERRO");
+                    cdpassword.setText("");
+                    cdconfpassword.setText("");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
         });

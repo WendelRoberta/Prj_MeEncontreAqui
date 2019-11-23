@@ -1,7 +1,6 @@
 package br.com.meencontreaqui.prj_meencontreaqui.ui.inicio;
 
-import androidx.fragment.app.FragmentActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -11,7 +10,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import br.com.meencontreaqui.prj_meencontreaqui.R;
+import java.util.List;
+
+import br.com.meencontreaqui.prj_meencontreaqui.User;
 
 public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback {
 
