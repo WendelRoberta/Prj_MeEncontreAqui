@@ -2,12 +2,12 @@ package br.com.meencontreaqui.prj_meencontreaqui;
 
 import java.io.Serializable;
 
-class User implements Serializable {
+public class User implements Serializable {
         private long id;
         private String name;
         private String password;
-        private long longitude;
-        private long latitude;
+        private String longitude;
+        private String latitude;
         private int active;
 
 
@@ -18,12 +18,12 @@ class User implements Serializable {
             super();
             this.name = name;
             this.password = password;
-            this.longitude = 0;
-            this.latitude = 0;
+            this.longitude = "";
+            this.latitude = "";
             this.active = 0;
         }
 
-    public User(String name, String password, Long longitude, Long latitude, int active) {
+    public User(String name, String password, String longitude, String latitude, int active) {
         this.name = name;
         this.password = password;
         this.longitude = longitude;
@@ -94,22 +94,22 @@ class User implements Serializable {
         }
 
 
-        public long getLongitude() {
+        public String getLongitude() {
             return longitude;
         }
 
 
-        public void setLongitude(long longitude) {
+        public void setLongitude(String longitude) {
             this.longitude = longitude;
         }
 
 
-        public long getLatitude() {
+        public String getLatitude() {
             return latitude;
         }
 
 
-        public void setLatitude(long latitude) {
+        public void setLatitude(String latitude) {
             this.latitude = latitude;
         }
 

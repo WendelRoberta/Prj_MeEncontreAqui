@@ -116,8 +116,8 @@ public class UserResources {
     private User jsonObjectToUser(JSONObject jsonObject) throws JSONException {
         String name = jsonObject.getString("name");
         String password = jsonObject.getString("password");
-        Long longitude = jsonObject.getLong("longitude");
-        Long latitude = jsonObject.getLong("latitude");
+        String longitude = jsonObject.getString("longitude");
+        String latitude = jsonObject.getString("latitude");
         int active = jsonObject.getInt("active");
 
         return new User(name,password,longitude,latitude,active);

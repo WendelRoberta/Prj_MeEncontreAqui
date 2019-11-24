@@ -1,7 +1,7 @@
 package br.com.meencontreaqui.prj_meencontreaqui.ui.inicio;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -10,13 +10,18 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
 import java.util.List;
 
 import br.com.meencontreaqui.prj_meencontreaqui.User;
+import br.com.meencontreaqui.prj_meencontreaqui.UserResources;
 
 public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+
+    //@+id/switchlocalizacao"
+   // UserResources userRes;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,11 +41,37 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+
+        try {
+            UserResources userRes = new UserResources();
+           List<User> lista = userRes.getUsers();
+            Log.d("lista tostring:", lista.toString());
+
+            for (User user: lista
+                 ) {
+                if(user.getActive() == 0){
+                    Log.d("For do mapa", user.toString());
+                    MarkerOptions marker = new MarkerOptions();
+
+                    LatLng userLocation = new LatLng(Double.valueOf(user.getLatitude()).doubleValue(),Double.valueOf(user.getLongitude()).doubleValue());
+                    marker.position(userLocation);
+                    marker.title(user.getName());
+                    mMap = googleMap;
+                    mMap.getUiSettings().setZoomControlsEnabled(true);
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
+
+
+                }
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+      //  mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+      //  mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }

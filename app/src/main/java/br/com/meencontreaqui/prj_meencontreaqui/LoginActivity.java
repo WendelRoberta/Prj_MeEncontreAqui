@@ -12,8 +12,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
-import java.io.Serializable;
-import java.util.List;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -70,7 +68,6 @@ public class LoginActivity extends AppCompatActivity {
                     UserResources userResources = new UserResources();
                     User response = null;
 
-                    List<User> lista = userResources.getUsers();
 
                     response = userResources.login(user);
                     if(response.getName().equalsIgnoreCase(user.getName()) && response.getPassword().equalsIgnoreCase(user.getPassword())){
@@ -78,7 +75,6 @@ public class LoginActivity extends AppCompatActivity {
                         Intent i = new Intent(getApplicationContext(), Principal.class);
                         i.putExtra("UserName",response.getName());
                         i.putExtra("Password",response.getPassword());
-                        i.putExtra("lista",(Serializable) lista);
                         startActivity(i);
 
                     }
