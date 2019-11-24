@@ -6,8 +6,8 @@ public class User implements Serializable {
         private long id;
         private String name;
         private String password;
-        private String longitude;
-        private String latitude;
+        private Double longitude;
+        private Double latitude;
         private int active;
 
 
@@ -18,12 +18,12 @@ public class User implements Serializable {
             super();
             this.name = name;
             this.password = password;
-            this.longitude = "";
-            this.latitude = "";
+            this.longitude = 0.0;
+            this.latitude = 0.0;
             this.active = 0;
         }
 
-    public User(String name, String password, String longitude, String latitude, int active) {
+    public User(String name, String password, Double longitude, Double latitude, int active) {
         this.name = name;
         this.password = password;
         this.longitude = longitude;
@@ -94,22 +94,22 @@ public class User implements Serializable {
         }
 
 
-        public String getLongitude() {
+        public Double getLongitude() {
             return longitude;
         }
 
 
-        public void setLongitude(String longitude) {
+        public void setLongitude(Double longitude) {
             this.longitude = longitude;
         }
 
 
-        public String getLatitude() {
+        public Double getLatitude() {
             return latitude;
         }
 
 
-        public void setLatitude(String latitude) {
+        public void setLatitude(Double latitude) {
             this.latitude = latitude;
         }
 

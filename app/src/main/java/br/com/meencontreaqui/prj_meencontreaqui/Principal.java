@@ -1,29 +1,22 @@
 package br.com.meencontreaqui.prj_meencontreaqui;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.widget.TextView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import android.view.View;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.fragment.app.ListFragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.Menu;
-import android.widget.TextView;
 
 import br.com.meencontreaqui.prj_meencontreaqui.ui.inicio.MapsFragment;
 
@@ -34,6 +27,7 @@ public class Principal extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private String nomeusuario;
     private FragmentManager fragmentManager;
+    FusedLocationProviderClient mFusedLocationClient;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +50,7 @@ public class Principal extends AppCompatActivity {
 
         TextView nomeusuario = (TextView) findViewById(R.id.txtusuario);
 
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.framemapa, new MapsFragment(), "MapsFragment");
@@ -67,6 +62,8 @@ public class Principal extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.principal, menu);
+
+        mFusedLocationClient.getLastLocation();
 
 
         return true;

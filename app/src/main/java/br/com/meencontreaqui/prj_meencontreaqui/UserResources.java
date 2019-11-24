@@ -116,8 +116,8 @@ public class UserResources {
     private User jsonObjectToUser(JSONObject jsonObject) throws JSONException {
         String name = jsonObject.getString("name");
         String password = jsonObject.getString("password");
-        String longitude = jsonObject.getString("longitude");
-        String latitude = jsonObject.getString("latitude");
+        Double longitude = jsonObject.getDouble("longitude");
+        Double latitude = jsonObject.getDouble("latitude");
         int active = jsonObject.getInt("active");
 
         return new User(name,password,longitude,latitude,active);
@@ -139,6 +139,48 @@ public class UserResources {
         } catch (JSONException e) {
             e.printStackTrace();
             System.out.println("Erro em inserir!");
+        }
+
+        conn.setDoOutput(true); //fala que voce vai enviar algo
+
+
+        PrintStream printStream = new PrintStream(conn.getOutputStream());
+        printStream.println(jsonObject); //seta o que voce vai enviar
+
+        conn.connect(); //envia para o servidor
+
+        String jsonDeResposta = new Scanner(conn.getInputStream()).next();
+
+        Log.i("zzz", "JSON enviado: " + jsonObject.toString());
+        Log.i("zzz", "Response Code: " + conn.getResponseCode());
+
+        if (conn.getResponseCode()==200){
+            success = true;
+        }
+
+
+
+        return success;
+    }
+    public boolean updateState(User user) throws IOException, JSONException {
+        boolean success = false;
+        URL url = new URL("https://projetomobile.herokuapp.com/api/user/name/"+user.getName());
+        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        conn.setRequestMethod("PUT");
+        //essa linha garante que o formato enviado vai ser application/json
+        conn.setRequestProperty("Content-Type", "application/json");
+
+        JSONObject jsonObject = new JSONObject();
+        //esse bloco tenta criar um json object com os parametros passados para criação
+        try {
+            jsonObject.put("name", user.getName());
+            jsonObject.put("password", user.getPassword());
+            jsonObject.put("latitude", user.getLatitude());
+            jsonObject.put("longitude", user.getLongitude());
+            jsonObject.put("active",user.getActive());
+        } catch (JSONException e) {
+            e.printStackTrace();
+            System.out.println("Erro ao editar o usuario!"+e.getMessage());
         }
 
         conn.setDoOutput(true); //fala que voce vai enviar algo

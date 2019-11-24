@@ -46,19 +46,30 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
             UserResources userRes = new UserResources();
            List<User> lista = userRes.getUsers();
             Log.d("lista tostring:", lista.toString());
+            googleMap.clear();
 
             for (User user: lista
                  ) {
+
                 if(user.getActive() == 0){
                     Log.d("For do mapa", user.toString());
                     MarkerOptions marker = new MarkerOptions();
+                   Double lati = user.getLatitude();
+                   Double longi = user.getLongitude();
+                    Log.d("latilonge", lati.toString()+longi.toString());
 
-                    LatLng userLocation = new LatLng(Double.valueOf(user.getLatitude()).doubleValue(),Double.valueOf(user.getLongitude()).doubleValue());
+                    LatLng userLocation = new LatLng(lati,longi);
                     marker.position(userLocation);
                     marker.title(user.getName());
                     mMap = googleMap;
+                    mMap.setMyLocationEnabled(true);
                     mMap.getUiSettings().setZoomControlsEnabled(true);
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
+
+                    // Add a marker in Sydney and move the camera
+                      mMap.addMarker(new MarkerOptions().position(userLocation).title(user.getName()));
+                      mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
+
 
 
                 }
