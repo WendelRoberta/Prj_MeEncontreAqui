@@ -2,6 +2,7 @@ package br.com.meencontreaqui.prj_meencontreaqui;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -55,6 +56,14 @@ public class Principal extends AppCompatActivity {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.framemapa, new MapsFragment(), "MapsFragment");
         transaction.commitAllowingStateLoss();
+
+        View header = navigationView.getHeaderView(0);
+        nomeusuario = header.findViewById(R.id.txtusuario);
+
+        if (savedInstanceState == null) {
+            String getName = getIntent().getStringExtra( "name");
+            nomeusuario.setText(getName);
+        }
 
     }
 

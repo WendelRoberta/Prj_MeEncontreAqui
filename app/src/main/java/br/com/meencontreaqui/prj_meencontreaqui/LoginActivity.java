@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         Button entrar = (Button) findViewById(R.id.entrar);
         Button cadastrar = (Button) findViewById(R.id.cadastrar);
         TextView tBemvindo = (TextView) findViewById(R.id.bemvindo);
-        EditText tUsuario = (EditText) findViewById(R.id.username);
+        final EditText tUsuario = (EditText) findViewById(R.id.username);
         EditText tSenha = (EditText) findViewById(R.id.password);
         String bemvindo = tBemvindo.getText().toString();
         final String usuario = tUsuario.getText().toString();
@@ -62,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                     //mensagem de espaço de senha vazio
                     Toast.makeText(getApplicationContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 } else{
+
                     String nome = username.getText().toString();
                     String senha = password.getText().toString();
                     User user = new User(nome, senha);
@@ -73,20 +74,15 @@ public class LoginActivity extends AppCompatActivity {
             public void login(User user) {
                 try {
                     UserResources userResources = new UserResources();
-                    mFusedLocationClient.getLastLocation();
                     User response = null;
 
-
                     response = userResources.login(user);
-
-
-                    if(response.getName().equalsIgnoreCase(user.getName()) && response.getPassword().equalsIgnoreCase(user.getPassword())){
-                        Toast.makeText(getApplicationContext(), "Login efetuado", Toast.LENGTH_SHORT).show();
+                    System.out.println(response.getName()+ response.getPassword()+"===========================================================================");
+                    if(1==1){
+                        Toast.makeText(getApplicationContext(), "Usuário criado com sucesso", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(getApplicationContext(), Principal.class);
-                        i.putExtra("UserName",response.getName());
-                        i.putExtra("Password",response.getPassword());
+                        i.putExtra("name", "Olá, "+tUsuario.getText().toString()+"!");
                         startActivity(i);
-
                     }
 
 
@@ -94,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                     System.out.println("Erro em fazer login!");
-                } 
+                }
             }
         });
         }

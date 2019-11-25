@@ -68,12 +68,17 @@ public class UserResources {
     //Rota de login
     public User login(User user) throws IOException {
         //URL com a rota pronta para fazer login
-        URL url = new URL("https://projetomobile.herokuapp.com/api/user/name/"+user.getName());
+        URL url = new URL("https://projetomobile.herokuapp.com/api/users");
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setRequestMethod("GET");
 
+        user.setLatitude(0.0);
+        user.setLongitude(0.0);
+        user.setActive(0);
+
         //Feedback do httprequest com codigo e menssagem caso tenha
         Log.i("zzz", "Response Code: " + conn.getResponseCode());
+        Log.i("zzz", "parameter user: " + user.toString());
         Log.i("zzz", "Response Message: " + conn.getResponseMessage());
 
         //Isso transforma a resposta em uma string

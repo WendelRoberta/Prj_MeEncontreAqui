@@ -46,12 +46,11 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
             UserResources userRes = new UserResources();
            List<User> lista = userRes.getUsers();
             Log.d("lista tostring:", lista.toString());
-            googleMap.clear();
 
             for (User user: lista
                  ) {
 
-                if(user.getActive() == 0){
+                if(user.getActive() == 1){
                     Log.d("For do mapa", user.toString());
                     MarkerOptions marker = new MarkerOptions();
                    Double lati = user.getLatitude();
