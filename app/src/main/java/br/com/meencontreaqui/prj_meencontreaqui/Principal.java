@@ -1,10 +1,22 @@
+/**
+ * Projeto de CPDM
+ * Nome: Me Encontre Aqui
+ * Data: 27/11/2019
+ * Autores: Aaban Vasconcelos; Luana de Sá; Thalita Barros; Wendel Roberta
+ * Professor: Renan Alencar
+ */
 package br.com.meencontreaqui.prj_meencontreaqui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -17,6 +29,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.navigation.NavigationView;
 
 import br.com.meencontreaqui.prj_meencontreaqui.ui.inicio.MapsFragment;
@@ -29,6 +42,7 @@ public class Principal extends AppCompatActivity {
     private String nomeusuario;
     private FragmentManager fragmentManager;
     FusedLocationProviderClient mFusedLocationClient;
+    private Switch btnswitch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -1,3 +1,10 @@
+/**
+ * Projeto de CPDM
+ * Nome: Me Encontre Aqui
+ * Data: 27/11/2019
+ * Autores: Aaban Vasconcelos; Luana de Sá; Thalita Barros; Wendel Roberta
+ * Professor: Renan Alencar
+ */
 package br.com.meencontreaqui.prj_meencontreaqui.ui.minhaconta;
 
 import android.os.Bundle;

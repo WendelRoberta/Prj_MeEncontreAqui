@@ -1,3 +1,10 @@
+/**
+ * Projeto de CPDM
+ * Nome: Me Encontre Aqui
+ * Data: 27/11/2019
+ * Autores: Aaban Vasconcelos; Luana de Sá; Thalita Barros; Wendel Roberta
+ * Professor: Renan Alencar
+ */
 package br.com.meencontreaqui.prj_meencontreaqui;
 
 import android.content.Context;
@@ -62,8 +69,6 @@ public class Cadastro extends AppCompatActivity {
                     String senha = cdconfpassword.getText().toString();
                     User user = new User(nome, senha);
                     this.inserirContato(user);
-
-
                 }
             }
             public void inserirContato(User user) {
@@ -72,7 +77,10 @@ public class Cadastro extends AppCompatActivity {
                 boolean success = false;
 
                 try {
+                    user.setLatitude(-8.3561477);
+                    user.setLongitude(-34.8981457);
                     success = userResources.insertUser(user);
+
                     if(success){
                         Toast.makeText(getApplicationContext(), "Usuário criado com sucesso", Toast.LENGTH_SHORT).show();
                         cdusername.setText("");

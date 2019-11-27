@@ -1,19 +1,24 @@
-package br.com.meencontreaqui.prj_meencontreaqui;
+/**
+ * Projeto de CPDM
+ * Nome: Me Encontre Aqui
+ * Data: 27/11/2019
+ * Autores: Aaban Vasconcelos; Luana de Sá; Thalita Barros; Wendel Roberta
+ * Professor: Renan Alencar
+ */
 
+package br.com.meencontreaqui.prj_meencontreaqui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-
 import java.io.IOException;
 
 
@@ -74,9 +79,11 @@ public class LoginActivity extends AppCompatActivity {
             public void login(User user) {
                 try {
                     UserResources userResources = new UserResources();
-                    User response = null;
+                    User response = new User("name", "password");
 
                     response = userResources.login(user);
+
+                    Log.i("response", response.toString());
                     System.out.println(response.getName()+ response.getPassword()+"===========================================================================");
                     if(1==1){
                         Toast.makeText(getApplicationContext(), "Usuário criado com sucesso", Toast.LENGTH_SHORT).show();
@@ -85,10 +92,9 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(i);
                     }
 
-
-
                 } catch (IOException e) {
                     e.printStackTrace();
+
                     System.out.println("Erro em fazer login!");
                 }
             }

@@ -30,5 +30,4 @@
             android:title="@string/menu_sair" />
     </group>
 
-
 </menu>

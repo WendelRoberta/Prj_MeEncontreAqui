@@ -1,24 +1,39 @@
+/**
+ * Projeto de CPDM
+ * Nome: Me Encontre Aqui
+ * Data: 27/11/2019
+ * Autores: Aaban Vasconcelos; Luana de Sá; Thalita Barros; Wendel Roberta
+ * Professor: Renan Alencar
+ */
 package br.com.meencontreaqui.prj_meencontreaqui.ui.inicio;
 
+import android.content.Context;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.List;
 
+import br.com.meencontreaqui.prj_meencontreaqui.R;
 import br.com.meencontreaqui.prj_meencontreaqui.User;
 import br.com.meencontreaqui.prj_meencontreaqui.UserResources;
 
 public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private Location mLastLocation = null;
 
     //@+id/switchlocalizacao"
    // UserResources userRes;
@@ -50,7 +65,8 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
             for (User user: lista
                  ) {
 
-                if(user.getActive() == 1){
+                if(user.getActive() == 0){
+
                     Log.d("For do mapa", user.toString());
                     MarkerOptions marker = new MarkerOptions();
                    Double lati = user.getLatitude();
@@ -65,11 +81,10 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                     mMap.getUiSettings().setZoomControlsEnabled(true);
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
 
-                    // Add a marker in Sydney and move the camera
+
+
                       mMap.addMarker(new MarkerOptions().position(userLocation).title(user.getName()));
                       mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
-
-
 
                 }
 
@@ -79,9 +94,12 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         }
 
 
+
+
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
       //  mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
       //  mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
+
 }

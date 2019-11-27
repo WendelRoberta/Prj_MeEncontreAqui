@@ -1,3 +1,10 @@
+/**
+ * Projeto de CPDM
+ * Nome: Me Encontre Aqui
+ * Data: 27/11/2019
+ * Autores: Aaban Vasconcelos; Luana de Sá; Thalita Barros; Wendel Roberta
+ * Professor: Renan Alencar
+ */
 package br.com.meencontreaqui.prj_meencontreaqui;
 
 import android.util.Log;
@@ -141,6 +148,8 @@ public class UserResources {
         try {
             jsonObject.put("name", user.getName());
             jsonObject.put("password", user.getPassword());
+        jsonObject.put("latitude", user.getLatitude());
+        jsonObject.put("longitude", user.getLongitude());
         } catch (JSONException e) {
             e.printStackTrace();
             System.out.println("Erro em inserir!");
