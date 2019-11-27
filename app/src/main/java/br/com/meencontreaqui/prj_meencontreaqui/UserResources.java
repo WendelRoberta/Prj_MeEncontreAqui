@@ -75,7 +75,7 @@ public class UserResources {
     //Rota de login
     public User login(User user) throws IOException {
         //URL com a rota pronta para fazer login
-        URL url = new URL("https://projetomobile.herokuapp.com/api/users");
+        URL url = new URL("https://projetomobile.herokuapp.com/api/user/name/"+user.getName());
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setRequestMethod("GET");
 

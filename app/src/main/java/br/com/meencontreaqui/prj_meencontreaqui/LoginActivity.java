@@ -83,9 +83,9 @@ public class LoginActivity extends AppCompatActivity {
 
                     response = userResources.login(user);
 
-                    Log.i("response", response.toString());
+                    Log.i("response", "response");
                     System.out.println(response.getName()+ response.getPassword()+"===========================================================================");
-                    if(1==1){
+                    if(response.getName().equals(user.getName())&& response.getPassword().equals(user.getPassword())){
                         Toast.makeText(getApplicationContext(), "Usuário criado com sucesso", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(getApplicationContext(), Principal.class);
                         i.putExtra("name", "Olá, "+tUsuario.getText().toString()+"!");
@@ -93,8 +93,8 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
                 } catch (IOException e) {
-                    e.printStackTrace();
-
+                   // e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Usuário ou senha inválidos", Toast.LENGTH_LONG).show();
                     System.out.println("Erro em fazer login!");
                 }
             }
